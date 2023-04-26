@@ -42,7 +42,7 @@ public class RouteConfig {
                         // 修改响应体(输入类型，输出类型，重写/修改函数)
                         .filters(f -> f.modifyResponseBody(String.class, String.class, ((exchange, json) -> {
                             // 将返回的数据存入到Redis中
-                            if (StringUtils.isBlank(json)) {
+                            if (StringUtils.isNotBlank(json)) {
                                 // 获取json中的token令牌及过期时间
                                 JSONObject jsonObject = JSON.parseObject(json);
 

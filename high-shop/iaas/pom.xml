@@ -11,8 +11,10 @@
 
     <artifactId>iaas</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>gateway</module>
+        <module>auth-server</module>
     </modules>
 
 </project>

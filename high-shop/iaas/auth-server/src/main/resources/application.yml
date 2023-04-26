@@ -1,0 +1,37 @@
+server:
+    port: ${AUTHSERVERPORT:5011}
+spring:
+    application:
+        name: auth-server
+#    datasource:
+#        druid:
+#            url: jdbc:mysql://localhost:3306/high-shop?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+#            username: root
+#            password: 123456
+#            driver-class-name: com.mysql.cj.jdbc.Driver
+#            # 最大连接数
+#            max-active: 30
+#            # 最小连接数
+#            min-idle: 3
+#            # 初始连接数
+#            initial-size: 3
+#            # 连接活性校验查询语句
+#            validation-query: select 1
+#            # 连接最大等待时间
+#            max-wait: 5000
+#            # 监控状态视图信息，监控信息敏感，要配置账号密码、允许和禁止访问的url等
+#            stat-view-servlet:
+#                enabled: true
+#                login-username: admin
+#                login-password: admin
+#                allow:
+#                deny:
+#                url-pattern:
+#                    - /druid/*
+## mybatis-plus
+#mybatis-plus:
+#    # mapper扫描
+#    mapper-locations: classpath:mapper/**/*.xml
+#    configuration:
+#        # 日志配置
+#        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

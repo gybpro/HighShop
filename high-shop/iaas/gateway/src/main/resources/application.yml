@@ -1,0 +1,40 @@
+server:
+    port: ${GATEWAYPORT:5001}
+spring:
+    application:
+        name: gateway
+
+#    cloud:
+#        gateway:
+#            discovery:
+#                locator:
+#                    # 开启通过动态路由的方式来进行请求转发
+#                    enabled: true
+#                    # 所有微服务名称转小写
+#                    lower-case-service-id: true
+#        nacos:
+#            discovery:
+#                server-addr: localhost:8848
+#                namespace: 131f2fce-6bf8-4a44-b0b5-d64844969ac9
+#                group: DEFAULT_GROUP
+#                username: nacos
+#                password: nacos
+#    redis:
+#        host: localhost
+#        port: 6379
+#        password: 123456
+#        database: 0
+#    rabbitmq:
+#        host: localhost
+#        port: 5672
+#        username: root
+#        password: 123456
+#        virtual-host: /
+#
+## management(把信息交给admin监控，由admin提供页面展示信息)
+#management:
+#    endpoints:
+#        web:
+#            exposure:
+#                # 开发所有端点，在浏览器中即可查看微服务详细信息
+#                include: '*'

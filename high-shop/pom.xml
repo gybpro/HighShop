@@ -9,6 +9,10 @@
     <version>1.0</version>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>iaas</module>
+    </modules>
+
     <!-- 版本控制 -->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

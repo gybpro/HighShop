@@ -16,7 +16,7 @@ public interface GatewayConstant {
 
     // URL白名单
     // 放行登录操作，获取token的url地址
-    List<String> WHITE_URL = Arrays.asList("oauth/token", "https://codegeex.cn");
+    List<String> WHITE_URL = Arrays.asList("/oauth/token", "https://codegeex.cn");
 
     // 客户端传来的token前缀
     String AUTHORIZATION_PREFIX = "Authorization";

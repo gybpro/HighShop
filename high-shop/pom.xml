@@ -11,6 +11,7 @@
 
     <modules>
         <module>iaas</module>
+        <module>common</module>
     </modules>
 
     <!-- 版本控制 -->

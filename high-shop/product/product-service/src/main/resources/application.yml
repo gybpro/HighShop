@@ -1,0 +1,15 @@
+server:
+    port: ${PRODUCTSERVICEPORT:5031}
+spring:
+    application:
+        name: product-service
+#    jackson:
+#        # 过滤null值
+#        default-property-inclusion: non_null
+#        # 东八区
+#        time-zone: GMT+8
+#        # 日期格式
+#        date-format: yyyy-MM-dd HH:mm:ss
+#        # 数字转字符串，防止精度丢失(如Long类型19位，number类型16位)
+#        generator:
+#            write-numbers-as-strings: true

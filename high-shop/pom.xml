@@ -12,6 +12,8 @@
     <modules>
         <module>iaas</module>
         <module>common</module>
+        <module>manager</module>
+        <module>product</module>
     </modules>
 
     <!-- 版本控制 -->

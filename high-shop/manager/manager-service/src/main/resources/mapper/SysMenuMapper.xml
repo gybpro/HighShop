@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.SysMenu">
+            <id property="menuId" column="menu_id" jdbcType="BIGINT"/>
+            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+            <result property="perms" column="perms" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        menu_id,parent_id,name,
+        url,perms,type,
+        icon,order_num
+    </sql>
+
+    <select id="selectMenuListByUserId" resultMap="BaseResultMap">
+        select distinct m.menu_id, m.parent_id, m.name, m.url, m.perms, m.type, m.icon, m.order_num
+            from sys_menu m
+        join sys_role_menu rm on rm.menu_id = m.menu_id
+        join sys_user_role ur on ur.role_id = rm.role_id
+        where ur.user_id = #{userId, jdbcType=BIGINT}
+        and (type = 0  or type = 1)
+    </select>
+
+    <select id="listByType" resultType="com.high.shop.domain.SysMenu">
+        select * from sys_menu where type = 0 or type = 1
+    </select>
+</mapper>

@@ -68,7 +68,7 @@ public class SysUser implements Serializable, UserDetails {
     }
 
     public String getUsername() {
-        return username;
+        return String.valueOf(userId);
     }
 
     public String getPassword() {

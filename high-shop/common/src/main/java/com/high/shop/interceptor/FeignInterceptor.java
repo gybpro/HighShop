@@ -1,5 +1,6 @@
 package com.high.shop.interceptor;
 
+import com.high.shop.base.BaseController;
 import com.high.shop.constant.CommonConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -26,7 +27,7 @@ public class FeignInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
 
         // 获取request对象
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes attributes = (ServletRequestAttributes) BaseController.getRequestAttributes();
 
         // 当前请求头向下传递token数据
         if(!ObjectUtils.isEmpty(attributes)){

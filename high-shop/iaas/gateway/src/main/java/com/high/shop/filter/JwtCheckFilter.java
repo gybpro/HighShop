@@ -57,7 +57,7 @@ public class JwtCheckFilter implements GlobalFilter, Ordered {
             String token = authorization.replaceAll(GatewayConstant.BEARER_PREFIX, GatewayConstant.EMPTY_STRING);
 
             // 判断是否有token
-            if (StringUtils.isBlank(token)) {
+            if (StringUtils.isNotBlank(token)) {
                 // 有token则放行
                 return chain.filter(exchange);
             }

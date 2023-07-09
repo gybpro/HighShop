@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.SkuMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.Sku">
+            <id property="skuId" column="sku_id" jdbcType="BIGINT"/>
+            <result property="prodId" column="prod_id" jdbcType="BIGINT"/>
+            <result property="properties" column="properties" jdbcType="VARCHAR"/>
+            <result property="oriPrice" column="ori_price" jdbcType="DECIMAL"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="stocks" column="stocks" jdbcType="INTEGER"/>
+            <result property="actualStocks" column="actual_stocks" jdbcType="INTEGER"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="recTime" column="rec_time" jdbcType="TIMESTAMP"/>
+            <result property="partyCode" column="party_code" jdbcType="VARCHAR"/>
+            <result property="modelId" column="model_id" jdbcType="VARCHAR"/>
+            <result property="pic" column="pic" jdbcType="VARCHAR"/>
+            <result property="skuName" column="sku_name" jdbcType="VARCHAR"/>
+            <result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+            <result property="weight" column="weight" jdbcType="DOUBLE"/>
+            <result property="volume" column="volume" jdbcType="DOUBLE"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        sku_id,prod_id,properties,
+        ori_price,price,stocks,
+        actual_stocks,update_time,rec_time,
+        party_code,model_id,pic,
+        sku_name,prod_name,version,
+        weight,volume,status,
+        is_delete
+    </sql>
+</mapper>

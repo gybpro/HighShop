@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.ProdTagMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.ProdTag">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="isDefault" column="is_default" jdbcType="TINYINT"/>
+            <result property="prodCount" column="prod_count" jdbcType="BIGINT"/>
+            <result property="style" column="style" jdbcType="INTEGER"/>
+            <result property="seq" column="seq" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="deleteTime" column="delete_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,shop_id,
+        status,is_default,prod_count,
+        style,seq,create_time,
+        update_time,delete_time
+    </sql>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.ProdPropMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.ProdProp">
+            <id property="propId" column="prop_id" jdbcType="BIGINT"/>
+            <result property="propName" column="prop_name" jdbcType="VARCHAR"/>
+            <result property="rule" column="rule" jdbcType="TINYINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        prop_id,prop_name,rule,
+        shop_id
+    </sql>
+</mapper>

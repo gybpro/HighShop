@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.ProdMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.Prod">
+            <id property="prodId" column="prod_id" jdbcType="BIGINT"/>
+            <result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="oriPrice" column="ori_price" jdbcType="DECIMAL"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="brief" column="brief" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="pic" column="pic" jdbcType="VARCHAR"/>
+            <result property="imgs" column="imgs" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="soldNum" column="sold_num" jdbcType="INTEGER"/>
+            <result property="totalStocks" column="total_stocks" jdbcType="INTEGER"/>
+            <result property="deliveryMode" column="delivery_mode" jdbcType="OTHER"/>
+            <result property="deliveryTemplateId" column="delivery_template_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="putawayTime" column="putaway_time" jdbcType="TIMESTAMP"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        prod_id,prod_name,shop_id,
+        ori_price,price,brief,
+        content,pic,imgs,
+        status,category_id,sold_num,
+        total_stocks,delivery_mode,delivery_template_id,
+        create_time,update_time,putaway_time,
+        version
+    </sql>
+</mapper>

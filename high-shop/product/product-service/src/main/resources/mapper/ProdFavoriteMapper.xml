@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.ProdFavoriteMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.ProdFavorite">
+            <id property="favoriteId" column="favorite_id" jdbcType="BIGINT"/>
+            <result property="prodId" column="prod_id" jdbcType="BIGINT"/>
+            <result property="recTime" column="rec_time" jdbcType="TIMESTAMP"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        favorite_id,prod_id,rec_time,
+        user_id
+    </sql>
+</mapper>

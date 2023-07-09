@@ -21,8 +21,13 @@ public enum State {
     UPDATE_ERROR(20004, "更新失败"),
     QUERY_ERROR(20005, "查询失败");
 
-    // 公司自定义的状态码
+    /**
+     * 公司自定义的状态码
+     */
     private Integer code;
-    // 状态信息
+
+    /**
+     * 状态信息
+     */
     private String msg;
 }

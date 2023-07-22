@@ -1,5 +1,7 @@
 package com.high.shop.constant;
 
+import java.time.format.DateTimeFormatter;
+
 public interface CommonConstant {
 
     String AUTHORIZATION_PREFIX = "Authorization";
@@ -9,4 +11,5 @@ public interface CommonConstant {
     Long DEFAULT_SHOP = 1L;
     Long DEFAULT_COUNT = 0L;
 
+    DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 }

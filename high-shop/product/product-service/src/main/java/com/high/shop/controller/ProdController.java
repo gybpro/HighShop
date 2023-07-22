@@ -50,6 +50,7 @@ public class ProdController extends BaseProductController {
         // 新增商品
         boolean flag = prodService.save(
                 prod.setShopId(CommonConstant.DEFAULT_SHOP)
+                        .setPrice(prod.getPrice())
                         .setOriPrice(prod.getOriPrice())
                         .setSoldNum(0)
                         .setCreateTime(LocalDateTime.now())

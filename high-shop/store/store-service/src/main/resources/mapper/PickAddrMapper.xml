@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.PickAddrMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.PickAddr">
+            <id property="addrId" column="addr_id" jdbcType="BIGINT"/>
+            <result property="addrName" column="addr_name" jdbcType="VARCHAR"/>
+            <result property="addr" column="addr" jdbcType="VARCHAR"/>
+            <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+            <result property="provinceId" column="province_id" jdbcType="BIGINT"/>
+            <result property="province" column="province" jdbcType="VARCHAR"/>
+            <result property="cityId" column="city_id" jdbcType="BIGINT"/>
+            <result property="city" column="city" jdbcType="VARCHAR"/>
+            <result property="areaId" column="area_id" jdbcType="BIGINT"/>
+            <result property="area" column="area" jdbcType="VARCHAR"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        addr_id,addr_name,addr,
+        mobile,province_id,province,
+        city_id,city,area_id,
+        area,shop_id
+    </sql>
+</mapper>

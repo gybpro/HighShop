@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.IndexImgMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.IndexImg">
+            <id property="imgId" column="img_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="imgUrl" column="img_url" jdbcType="VARCHAR"/>
+            <result property="des" column="des" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="link" column="link" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="seq" column="seq" jdbcType="INTEGER"/>
+            <result property="uploadTime" column="upload_time" jdbcType="TIMESTAMP"/>
+            <result property="relation" column="relation" jdbcType="BIGINT"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        img_id,shop_id,img_url,
+        des,title,link,
+        status,seq,upload_time,
+        relation,type
+    </sql>
+</mapper>

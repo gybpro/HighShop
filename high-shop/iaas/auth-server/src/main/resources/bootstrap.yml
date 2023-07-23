@@ -10,4 +10,4 @@ spring:
                 prefix: application
                 file-extension: yml
     profiles:
-        active: nacos, datasource, mybatis-plus, redis, rabbitmq, management
+        active: nacos, datasource, mybatis-plus, redis, rabbitmq, management, wx

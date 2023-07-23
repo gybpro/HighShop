@@ -70,9 +70,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 // swagger druid actuator...
                 .antMatchers("/v2/api-docs",
                         "/v3/api-docs",
-                        "/swagger-resources/configuration/ui",//用来获取支持的动作
-                        "/swagger-resources",//用来获取api-docs的URI
-                        "/swagger-resources/configuration/security",//安全选项
+                        //用来获取支持的动作
+                        "/swagger-resources/configuration/ui",
+                        //用来获取api-docs的URI
+                        "/swagger-resources",
+                        //安全选项
+                        "/swagger-resources/configuration/security",
                         "/webjars/**",
                         "/swagger-ui/**",
                         "/druid/**",

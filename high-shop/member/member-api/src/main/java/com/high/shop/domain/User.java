@@ -1,37 +1,35 @@
 package com.high.shop.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.io.Serializable;
-import java.time.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
-* 用户表
-* @TableName user
-*/
+ * @author high
+ * 用户表
+ * @TableName user
+ */
 @TableName(value ="user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class User implements Serializable, UserDetails {
+public class User implements Serializable {
 
     /**
      * 主键
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     @NotBlank(message="主键不能为空")
     @Size(max= 36, message="长度不能超过36")
     private String userId;
@@ -138,54 +136,4 @@ public class User implements Serializable, UserDetails {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 客户端认证，前端都是同一个权限，不返回空即可
-     *
-     * @return
-     */
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 前端都是一个权限
-        return new ArrayList<>();
-    }
-
-    /**
-     * 微信小程序密码一般都是统一的，客户端认证
-     *
-     * @return
-     */
-    @Override
-    public String getPassword() {
-        return new BCryptPasswordEncoder().encode("WECHAT");
-    }
-
-    /**
-     * 微信返回的openId是String类型的，我们将它作为用户的唯一标识来使用
-     *
-     * @return
-     */
-    @Override
-    public String getUsername() {
-        return this.userId;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return this.status == 1;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.status == 1;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.status == 1;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.status == 1;
-    }
 }

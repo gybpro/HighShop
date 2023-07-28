@@ -140,10 +140,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
                 }
             }
             default: {
-                // 登录失败
-                return null;
+
             }
         }
+
+        // 登录失败
+        return null;
     }
 
 }

@@ -7,7 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +51,16 @@ public class BaseController {
         return RequestContextHolder.getRequestAttributes();
     }
 
+    // 获取当前请求IP
+    public static String getRequestIp() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) getRequestAttributes();
+        return attributes.getRequest().getRemoteAddr();
+    }
+
     // 检查操作
     public static void checked(boolean flag, State state) {
-        if (!flag) throw new RuntimeException(state.getCode() + " : " + state.getMsg());
+        if (!flag) {
+            throw new RuntimeException(state.getCode() + " : " + state.getMsg());
+        }
     }
 }

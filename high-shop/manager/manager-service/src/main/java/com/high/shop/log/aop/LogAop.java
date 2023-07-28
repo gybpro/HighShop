@@ -73,8 +73,7 @@ public class LogAop {
         String value = annotation.value();
 
         // 获取ip地址
-        ServletRequestAttributes attributes = (ServletRequestAttributes) BaseController.getRequestAttributes();
-        String ip = attributes.getRequest().getRemoteAddr();
+        String ip = BaseController.getRequestIp();
 
         // 通过日志线程池线程执行日志记录操作
         ManagerThreadPool.poolExecutor.execute(() -> sysLogMapper.insert(

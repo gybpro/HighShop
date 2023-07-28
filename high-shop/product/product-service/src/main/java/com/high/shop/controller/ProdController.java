@@ -88,4 +88,11 @@ public class ProdController extends BaseProductController {
 
         return ok(true);
     }
+
+    // ============== 远程调用 ==============
+    @GetMapping("/getListByIds")
+    public List<Prod> getListByIds(@RequestParam("ids") List<Long> ids) {
+        return prodService.listByIds(ids);
+    }
+
 }

@@ -15,6 +15,7 @@
         <module>manager</module>
         <module>product</module>
         <module>store</module>
+        <module>member</module>
     </modules>
 
     <!-- 版本控制 -->

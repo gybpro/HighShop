@@ -11,8 +11,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author high
@@ -23,8 +23,11 @@ import java.time.LocalDateTime;
 @RequestMapping("/shop/notice")
 public class NoticeController extends BaseStoreController {
 
-    @Resource
-    private NoticeService noticeService;
+    private final NoticeService noticeService;
+
+    public NoticeController(NoticeService noticeService) {
+        this.noticeService = noticeService;
+    }
 
     @GetMapping("/page")
     public ResponseEntity<Page<Notice>> page(Page<Notice> page, Notice notice) {
@@ -32,8 +35,8 @@ public class NoticeController extends BaseStoreController {
                 noticeService.page(
                         page,
                         new LambdaQueryWrapper<Notice>()
-                                .eq(ObjectUtils.isNotEmpty(notice.getIsTop()),  Notice::getIsTop, notice.getIsTop())
-                                .eq(ObjectUtils.isNotEmpty(notice.getStatus()),  Notice::getStatus, notice.getStatus())
+                                .eq(ObjectUtils.isNotEmpty(notice.getIsTop()), Notice::getIsTop, notice.getIsTop())
+                                .eq(ObjectUtils.isNotEmpty(notice.getStatus()), Notice::getStatus, notice.getStatus())
                                 .like(StringUtils.isNotBlank(notice.getTitle()), Notice::getTitle, notice.getTitle())
                 )
         );
@@ -47,6 +50,36 @@ public class NoticeController extends BaseStoreController {
                                 .setPublishTime(LocalDateTime.now())
                                 .setUpdateTime(LocalDateTime.now())
                 )
+        );
+    }
+
+    @GetMapping("/topNoticeList")
+    public ResponseEntity<List<Notice>> topNoticeList() {
+        return ok(
+                noticeService.list(
+                        new LambdaQueryWrapper<Notice>()
+                                .eq(Notice::getStatus, 1)
+                                .eq(Notice::getIsTop, 1)
+                )
+        );
+    }
+
+    @GetMapping("/noticeList")
+    public ResponseEntity<Page<Notice>> noticeList(@RequestParam(defaultValue = "1") Long current,
+                                                   @RequestParam(defaultValue = "10") Long size) {
+        return ok(
+                noticeService.page(
+                        new Page<>(current, size),
+                        new LambdaQueryWrapper<Notice>()
+                                .eq(Notice::getStatus, 1)
+                )
+        );
+    }
+
+    @GetMapping("/info/{noticeId}")
+    public ResponseEntity<Notice> info(@PathVariable Long noticeId) {
+        return ok(
+                noticeService.getById(noticeId)
         );
     }
 

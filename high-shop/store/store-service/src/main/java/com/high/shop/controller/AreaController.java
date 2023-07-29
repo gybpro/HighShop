@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,8 +22,11 @@ import java.util.List;
 @RequestMapping("/admin/area")
 public class AreaController extends BaseStoreController {
 
-    @Resource
-    private AreaService areaService;
+    private final AreaService areaService;
+
+    public AreaController(AreaService areaService) {
+        this.areaService = areaService;
+    }
 
     @GetMapping("/list")
     public ResponseEntity<List<Area>> list() {

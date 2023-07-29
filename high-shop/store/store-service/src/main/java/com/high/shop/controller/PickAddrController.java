@@ -10,8 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-
 /**
  * @author high
  * @version 1.0
@@ -21,8 +19,11 @@ import javax.annotation.Resource;
 @RequestMapping("/shop/pickAddr")
 public class PickAddrController extends BaseStoreController {
 
-    @Resource
-    private PickAddrService pickAddrService;
+    private final PickAddrService pickAddrService;
+
+    public PickAddrController(PickAddrService pickAddrService) {
+        this.pickAddrService = pickAddrService;
+    }
 
     @GetMapping("/page")
     public ResponseEntity<Page<PickAddr>> page(Page<PickAddr> page, PickAddr pickAddr) {

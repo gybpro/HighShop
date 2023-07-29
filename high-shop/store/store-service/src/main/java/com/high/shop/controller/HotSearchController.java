@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 
 /**
@@ -23,8 +22,11 @@ import java.time.LocalDateTime;
 @RequestMapping("/admin/hotSearch")
 public class HotSearchController extends BaseStoreController {
 
-    @Resource
-    private HotSearchService hotSearchService;
+    private final HotSearchService hotSearchService;
+
+    public HotSearchController(HotSearchService hotSearchService) {
+        this.hotSearchService = hotSearchService;
+    }
 
     @GetMapping("/page")
     public ResponseEntity<Page<HotSearch>> page(Page<HotSearch> page, HotSearch hotSearch) {

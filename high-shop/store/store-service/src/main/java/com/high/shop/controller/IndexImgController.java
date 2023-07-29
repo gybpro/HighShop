@@ -10,8 +10,8 @@ import com.high.shop.service.IndexImgService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author high
@@ -22,8 +22,11 @@ import java.time.LocalDateTime;
 @RequestMapping("/admin/indexImg")
 public class IndexImgController extends BaseStoreController {
 
-    @Resource
-    private IndexImgService indexImgService;
+    private final IndexImgService indexImgService;
+
+    public IndexImgController(IndexImgService indexImgService) {
+        this.indexImgService = indexImgService;
+    }
 
     @GetMapping("/page")
     public ResponseEntity<Page<IndexImg>> page(Page<IndexImg> page, IndexImg indexImg) {
@@ -43,6 +46,17 @@ public class IndexImgController extends BaseStoreController {
                 indexImgService.save(
                         indexImg.setShopId(CommonConstant.DEFAULT_SHOP)
                                 .setUploadTime(LocalDateTime.now())
+                )
+        );
+    }
+
+    @GetMapping("/indexImgs")
+    public ResponseEntity<List<IndexImg>> indexImgs() {
+        return ok(
+                indexImgService.list(
+                        new LambdaQueryWrapper<IndexImg>()
+                                .select(IndexImg::getImgUrl, IndexImg::getRelation)
+                                .eq(IndexImg::getStatus, 1)
                 )
         );
     }

@@ -22,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/prod/prodTag")
 public class ProdTagController extends BaseProductController {
+
     private final ProdTagService prodTagService;
 
     public ProdTagController(ProdTagService prodTagService) {
@@ -72,4 +73,16 @@ public class ProdTagController extends BaseProductController {
                 )
         );
     }
+
+    @GetMapping("/prodTagList")
+    public ResponseEntity<List<ProdTag>> prodTagList() {
+        return ok(
+                prodTagService.list(
+                        new LambdaQueryWrapper<ProdTag>()
+                                .eq(ProdTag::getStatus, 1)
+                                .orderByDesc(ProdTag::getSeq)
+                )
+        );
+    }
+
 }

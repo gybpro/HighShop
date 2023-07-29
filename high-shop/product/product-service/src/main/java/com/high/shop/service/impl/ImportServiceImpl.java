@@ -319,6 +319,8 @@ public class ImportServiceImpl implements ImportService, CommandLineRunner {
                                     .praiseNumber(praiseNumber.longValue())
                                     // 好评率
                                     .positiveRating(positiveRating)
+                                    // 商品图片
+                                    .pic(prod.getPic())
                                     .build()
                     );
                 }

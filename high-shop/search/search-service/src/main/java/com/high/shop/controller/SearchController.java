@@ -148,13 +148,12 @@ public class SearchController extends BaseSearchController {
         );
 
         // 将ES查询结果封装到Page对象
-        List<ProdEs> prodEsList = searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList());
-
-        Page<ProdEs> page = new Page<>(current, size, searchHits.getTotalHits());
-
-        page.setRecords(prodEsList);
-
-        return ok(page);
+        return ok(
+                new Page<ProdEs>(current, size, searchHits.getTotalHits())
+                        .setRecords(
+                                searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList())
+                        )
+        );
     }
 
 }

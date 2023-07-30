@@ -16,6 +16,7 @@
         <module>product</module>
         <module>store</module>
         <module>member</module>
+        <module>search</module>
     </modules>
 
     <!-- 版本控制 -->

@@ -17,6 +17,11 @@ import java.util.List;
 @FeignClient("product-service")
 public interface ProductServiceFeign {
 
+    /**
+     * 根据id获取商品信息
+     * @param ids
+     * @return
+     */
     @GetMapping("/prod/prod/getListByIds")
     List<Prod> getListByIds(@RequestParam("ids") List<Long> ids);
 

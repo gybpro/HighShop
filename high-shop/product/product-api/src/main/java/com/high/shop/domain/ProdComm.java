@@ -119,4 +119,10 @@ public class ProdComm implements Serializable {
     @TableField(exist = false)
     private String prodName;
 
+    @TableField(exist = false)
+    private String nickName;
+
+    @TableField(exist = false)
+    private String pic;
+
 }

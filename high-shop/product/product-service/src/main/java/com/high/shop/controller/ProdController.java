@@ -86,7 +86,23 @@ public class ProdController extends BaseProductController {
                         .setIsDelete(0)
         );
 
+        skuService.saveBatch(skuList);
+
         return ok(true);
+    }
+
+    @GetMapping("/prodInfo")
+    public ResponseEntity<Prod> prodInfo(@RequestParam Long prodId) {
+        Prod prod = prodService.getById(prodId);
+
+        List<Sku> skuList = skuService.list(
+                new LambdaQueryWrapper<Sku>()
+                        .eq(Sku::getProdId, prodId)
+        );
+
+        prod.setSkuList(skuList);
+
+        return ok(prod);
     }
 
     // ============== 远程调用 ==============

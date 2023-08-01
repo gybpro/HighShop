@@ -1,15 +1,14 @@
 package com.high.shop.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.high.shop.base.BaseMemberController;
 import com.high.shop.domain.User;
 import com.high.shop.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author high
@@ -36,6 +35,16 @@ public class UserController extends BaseMemberController {
                                 .setUserLasttime(LocalDateTime.now())
                                 .setUserLastip(getRequestIp())
                 )
+        );
+    }
+
+    // ============== 远程调用 ==============
+    @GetMapping("/getListByIds")
+    public List<User> getListByIds(@RequestParam("ids") List<String> ids) {
+        return userService.list(
+                new LambdaQueryWrapper<User>()
+                        .select(User::getUserId, User::getNickName, User::getPic)
+                        .in(User::getUserId, ids)
         );
     }
 

@@ -9,10 +9,10 @@ import com.high.shop.feign.ProductServiceFeign;
 import com.high.shop.service.UserCollectionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +66,47 @@ public class UserCollectionController extends BaseMemberController {
                 collectionPage.getTotal());
 
         return ok(prodPage.setRecords(prodList));
+    }
+
+    @GetMapping("/isCollection")
+    public ResponseEntity<Boolean> isCollection(@RequestParam Long prodId) {
+        return ok(
+                userCollectionService.count(
+                        new LambdaQueryWrapper<UserCollection>()
+                                .eq(UserCollection::getUserId, getAuthenticationUserId())
+                                .eq(UserCollection::getProdId, prodId)
+                ) > 0
+        );
+    }
+
+    @PostMapping("/addOrCancel")
+    public ResponseEntity<Boolean> addOrCancel(Long prodId) {
+        // 根据用户id和商品id查询用户是否收藏该商品
+        UserCollection userCollection = userCollectionService.getOne(
+                new LambdaQueryWrapper<UserCollection>()
+                        .eq(UserCollection::getUserId, getAuthenticationUserId())
+                        .eq(UserCollection::getProdId, prodId)
+        );
+
+        boolean flag;
+
+        if (ObjectUtils.isEmpty(userCollection)) {
+            // 如果没收藏，则新增收藏记录
+            flag = userCollectionService.save(
+                    new UserCollection()
+                            .setUserId(getAuthenticationUserId())
+                            .setCreateTime(LocalDateTime.now())
+                            .setProdId(prodId)
+            );
+        } else {
+            // 如果收藏了，则删除收藏记录
+            flag = userCollectionService.remove(
+                    new LambdaQueryWrapper<UserCollection>()
+                            .eq(UserCollection::getId, userCollection.getId())
+            );
+        }
+
+        return ok(flag);
     }
 
 }

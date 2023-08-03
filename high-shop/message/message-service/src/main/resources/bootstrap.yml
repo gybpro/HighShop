@@ -10,4 +10,4 @@ spring:
                 prefix: application
                 file-extension: yml
     profiles:
-        active: nacos, jackson, datasource, mybatis-plus, swagger, redis, rabbitmq, management, mvc, feign, ribbon, hystrix, sms
+        active: nacos, jackson, datasource, mybatis-plus, swagger, redis, rabbitmq, management, mvc, es, feign, ribbon, hystrix

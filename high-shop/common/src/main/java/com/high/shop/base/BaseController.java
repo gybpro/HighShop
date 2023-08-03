@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class BaseController {
     // 正常响应信息
-    public static <T> ResponseEntity<T> ok(T data) {
+    public <T> ResponseEntity<T> ok(T data) {
         return ResponseEntity.ok(data);
     }
 
@@ -57,10 +58,17 @@ public class BaseController {
         return attributes.getRequest().getRemoteAddr();
     }
 
-    // 检查操作
-    public static void checked(boolean flag, State state) {
+    // 检查增删改操作
+    public void checked(boolean flag, State state) {
         if (!flag) {
             throw new RuntimeException(state.getCode() + " : " + state.getMsg());
+        }
+    }
+
+    // 检查参数
+    public void checked(String... params) {
+        if (ObjectUtils.isEmpty(params)) {
+            throw new RuntimeException(State.PARAMS_ERROR.getCode() + " : " + State.PARAMS_ERROR.getMsg());
         }
     }
 }

@@ -19,7 +19,11 @@ public enum State {
     SAVE_ERROR(20002, "新增失败"),
     DELETE_ERROR(20003, "删除失败"),
     UPDATE_ERROR(20004, "更新失败"),
-    QUERY_ERROR(20005, "查询失败");
+    QUERY_ERROR(20005, "查询失败"),
+    PARAMS_ERROR(20006, "参数错误"),
+    LOGIN_ERROR(20007, "登录失败"),
+    LOGOUT_ERROR(20008, "登出失败"),
+    TOKEN_ERROR(20009, "token错误");
 
     /**
      * 公司自定义的状态码

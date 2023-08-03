@@ -12,4 +12,9 @@ public interface CommonConstant {
     Long DEFAULT_COUNT = 0L;
 
     DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+
+    String OK_CODE = "OK";
+    String ERROR_CODE = "ERROR";
+
+    Long SMS_CODE_SIZE = 6L;
 }

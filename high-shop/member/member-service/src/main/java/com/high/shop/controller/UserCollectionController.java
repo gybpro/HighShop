@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,7 +81,7 @@ public class UserCollectionController extends BaseMemberController {
     }
 
     @PostMapping("/addOrCancel")
-    public ResponseEntity<Boolean> addOrCancel(Long prodId) {
+    public ResponseEntity<Boolean> addOrCancel(@NotNull Long prodId) {
         // 根据用户id和商品id查询用户是否收藏该商品
         UserCollection userCollection = userCollectionService.getOne(
                 new LambdaQueryWrapper<UserCollection>()

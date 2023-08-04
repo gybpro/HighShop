@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
- * 短信验证配置
- *
  * @author high
  * @version 1.0
  * @since 1.0
@@ -18,13 +16,14 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 @Configuration
-@ConfigurationProperties(prefix = "sms")
-public class SmsProperties {
-    private String accessKeyId;
-    private String accessKeySecret;
-    private String endpoint;
-    private String signName;
-    private String templateCode;
-    private String templateParam;
+@ConfigurationProperties(prefix = "wx.msg")
+public class WxMsgProperties {
+    private String appId;
+    private String appSecret;
+    private String getTokenUrl;
+    // private String getTokeType;
+    private String templateId;
+    private String sendMsgUrl;
+    // private String sendMsgType;
+    private Long refreshSeconds;
 }
-

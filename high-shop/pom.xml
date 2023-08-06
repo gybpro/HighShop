@@ -18,6 +18,7 @@
         <module>member</module>
         <module>search</module>
         <module>message</module>
+        <module>cart</module>
     </modules>
 
     <!-- 版本控制 -->

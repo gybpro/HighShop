@@ -5,9 +5,11 @@ import com.high.shop.base.BaseMemberController;
 import com.high.shop.domain.User;
 import com.high.shop.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +43,10 @@ public class UserController extends BaseMemberController {
     // ============== 远程调用 ==============
     @GetMapping("/getListByIds")
     public List<User> getListByIds(@RequestParam("ids") List<String> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return new ArrayList<>();
+        }
+
         return userService.list(
                 new LambdaQueryWrapper<User>()
                         .select(User::getUserId, User::getNickName, User::getPic)

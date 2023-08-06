@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.BasketMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.Basket">
+            <id property="basketId" column="basket_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="prodId" column="prod_id" jdbcType="BIGINT"/>
+            <result property="skuId" column="sku_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="basketCount" column="basket_count" jdbcType="INTEGER"/>
+            <result property="basketDate" column="basket_date" jdbcType="TIMESTAMP"/>
+            <result property="discountId" column="discount_id" jdbcType="BIGINT"/>
+            <result property="distributionCardNo" column="distribution_card_no" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        basket_id,shop_id,prod_id,
+        sku_id,user_id,basket_count,
+        basket_date,discount_id,distribution_card_no
+    </sql>
+</mapper>

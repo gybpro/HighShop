@@ -111,4 +111,17 @@ public class ProdController extends BaseProductController {
         return prodService.listByIds(ids);
     }
 
+    @GetMapping("/getSkuStocks")
+    public Integer getSkuStocks(@RequestParam("skuId") Long skuId) {
+        return skuService.getOne(
+                new LambdaQueryWrapper<Sku>()
+                        .eq(Sku::getSkuId, skuId)
+        ).getStocks();
+    }
+
+    @GetMapping("/getSkuListByIds")
+    public List<Sku> getSkuListByIds(@RequestParam("skuIds") List<Long> skuIds) {
+        return skuService.listByIds(skuIds);
+    }
+
 }

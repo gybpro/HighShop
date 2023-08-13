@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.OrderItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.OrderItem">
+            <id property="orderItemId" column="order_item_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <result property="prodId" column="prod_id" jdbcType="BIGINT"/>
+            <result property="skuId" column="sku_id" jdbcType="BIGINT"/>
+            <result property="prodCount" column="prod_count" jdbcType="INTEGER"/>
+            <result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+            <result property="skuName" column="sku_name" jdbcType="VARCHAR"/>
+            <result property="pic" column="pic" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="productTotalAmount" column="product_total_amount" jdbcType="DECIMAL"/>
+            <result property="recTime" column="rec_time" jdbcType="TIMESTAMP"/>
+            <result property="commSts" column="comm_sts" jdbcType="INTEGER"/>
+            <result property="distributionCardNo" column="distribution_card_no" jdbcType="VARCHAR"/>
+            <result property="basketDate" column="basket_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_item_id,shop_id,order_number,
+        prod_id,sku_id,prod_count,
+        prod_name,sku_name,pic,
+        price,user_id,product_total_amount,
+        rec_time,comm_sts,distribution_card_no,
+        basket_date
+    </sql>
+</mapper>

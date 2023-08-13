@@ -57,13 +57,17 @@ public class UserAddrController extends BaseMemberController {
                 oldAddr.setCommonAddr(0).setUpdateTime(LocalDateTime.now())
         );
 
-        if (!flag) { throw new RuntimeException("更新失败"); }
+        if (!flag) {
+            throw new RuntimeException("更新失败");
+        }
 
         flag = userAddrService.updateById(
                 userAddr.setCommonAddr(1).setUpdateTime(LocalDateTime.now())
         );
 
-        if (!flag) { throw new RuntimeException("更新失败"); }
+        if (!flag) {
+            throw new RuntimeException("更新失败");
+        }
 
         return ok(true);
     }
@@ -112,6 +116,16 @@ public class UserAddrController extends BaseMemberController {
     public ResponseEntity<Boolean> deleteAddr(@PathVariable("addrId") Long addrId) {
         return ok(
                 userAddrService.removeById(addrId)
+        );
+    }
+
+    // ============== 远程调用 ==============
+    @GetMapping("/defaultAddr/{userId}")
+    public UserAddr defaultAddr(@PathVariable("userId") String userId) {
+        return userAddrService.getOne(
+                new LambdaQueryWrapper<UserAddr>()
+                        .eq(UserAddr::getUserId, userId)
+                        .eq(UserAddr::getCommonAddr, 1)
         );
     }
 

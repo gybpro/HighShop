@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 1.0
  */
 @FeignClient("member-service")
-public interface MemberServiceFeign {
+public interface ProductMemberFeign {
 
     /**
      * 根据用户id获取用户信息

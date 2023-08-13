@@ -15,7 +15,7 @@ import java.util.List;
 // 尽可能一个微服务一个Feign对象，这样方便使用和维护
 // 一个微服务如果对应多个Feign对象会报Bean重复错误，需要指定Feign对象，且会出现覆盖，可维护性变低
 @FeignClient("product-service")
-public interface ProductServiceFeign {
+public interface MemberProductFeign {
 
     /**
      * 根据id获取商品信息

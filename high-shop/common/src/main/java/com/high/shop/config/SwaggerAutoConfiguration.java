@@ -14,6 +14,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @EnableOpenApi // 开启swagger功能
 public class SwaggerAutoConfiguration {
 
-    @Autowired
+    @Resource
     private SwaggerProperties swaggerProperties;
 
     /**

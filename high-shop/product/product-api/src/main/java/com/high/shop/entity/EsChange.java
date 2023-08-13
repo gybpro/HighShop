@@ -11,15 +11,10 @@ import lombok.experimental.Accessors;
  * @version 1.0
  * @since 1.0
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Accessors(chain = true)
-public class EsChange {
-
-    private Long prodId;
-
-    private Integer count;
-
+// @Data
+// @NoArgsConstructor
+// @AllArgsConstructor
+// @Builder
+// @Accessors(chain = true)
+public class EsChange extends ProdChange {
 }

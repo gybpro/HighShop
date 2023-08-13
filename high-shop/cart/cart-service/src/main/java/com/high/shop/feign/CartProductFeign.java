@@ -13,7 +13,7 @@ import java.util.List;
  * @since 1.0
  */
 @FeignClient("product-service")
-public interface ProductServiceFeign {
+public interface CartProductFeign {
 
     /**
      * 根据skuId获取库存单位(具体产品)库存数量

@@ -101,13 +101,13 @@ public class UserAddr implements Serializable {
      * 状态,1正常，0无效
      */
     @TableLogic
-    @NotNull(message="状态,1正常，0无效不能为空")
+    @NotNull(message="状态,1正常，0无效，不能为空")
     private Integer status;
 
     /**
      * 是否默认地址 1是
      */
-    @NotNull(message="是否默认地址 1是不能为空")
+    @NotNull(message="是否默认地址 1是 0否，不能为空")
     private Integer commonAddr;
 
     /**

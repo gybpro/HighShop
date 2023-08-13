@@ -130,6 +130,7 @@ public class Prod implements Serializable {
     /**
      * 版本 乐观锁
      */
+    @Version
     private Integer version;
 
     @TableField(exist = false)

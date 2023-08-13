@@ -24,22 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         // 请求授权访问操作
         http.authorizeRequests()
                 // 健康检查的请求
-                .antMatchers(
-                        "/v2/api-docs",
-                        "/v3/api-docs",
-                        // 用来获取支持的动作
-                        "/swagger-resources/configuration/ui",
-                        // 用来获取api-docs的URI
-                        "/swagger-resources",
-                        // 安全选项
-                        "/swagger-resources/configuration/security",
-                        "/webjars/**",
-                        "/swagger-ui/**",
-                        "/druid/**",
-                        "/actuator/**",
-                        // 发送微信公众号消息，测试暂时放行
-                        "/p/sms/sendWxMsg"
-                )
+                .antMatchers("/actuator/**")
                 // 放行以上所有请求
                 .permitAll()
                 // 其他请求

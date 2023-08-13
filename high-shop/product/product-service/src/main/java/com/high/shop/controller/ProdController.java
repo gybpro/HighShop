@@ -1,13 +1,19 @@
 package com.high.shop.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.high.shop.base.BaseProductController;
 import com.high.shop.constant.CommonConstant;
 import com.high.shop.domain.Prod;
 import com.high.shop.domain.ProdTagReference;
 import com.high.shop.domain.Sku;
+import com.high.shop.entity.ChangeStock;
+import com.high.shop.entity.ProdChange;
+import com.high.shop.entity.SkuChange;
 import com.high.shop.enums.State;
+import com.high.shop.mapper.ProdMapper;
+import com.high.shop.service.ProdService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -26,6 +32,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/prod/prod")
 public class ProdController extends BaseProductController {
+
+    private final ProdService prodService;
+
+    public ProdController(ProdService prodService) {
+        this.prodService = prodService;
+    }
+
     @GetMapping("/page")
     public ResponseEntity<Page<Prod>> page(Page<Prod> page, String prodName, Integer status) {
         return ok(
@@ -122,6 +135,11 @@ public class ProdController extends BaseProductController {
     @GetMapping("/getSkuListByIds")
     public List<Sku> getSkuListByIds(@RequestParam("skuIds") List<Long> skuIds) {
         return skuService.listByIds(skuIds);
+    }
+
+    @PostMapping("/updateProdAndSkuStock")
+    public void updateProdAndSkuStock(@RequestBody ChangeStock changeStock) {
+        prodService.updateProdAndSkuStock(changeStock);
     }
 
 }

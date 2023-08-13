@@ -20,4 +20,12 @@ public interface QueueConstant {
     // 微信消息队列
     String WX_MSG_QUEUE = "wx.msg.queue";
 
+    // 订单消息队列
+    String ORDER_MSG_QUEUE = "order.msg.queue";
+
+    // 订单死信队列
+    String ORDER_DEAD_QUEUE = "order.dead.queue";
+    String ORDER_DEAD_EXCHANGE = "order.dead.exchange";
+    String ORDER_DEAD_ROUTING_KEY = "order.dead";
+
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.high.shop.mapper.OrderRefundMapper">
+
+    <resultMap id="BaseResultMap" type="com.high.shop.domain.OrderRefund">
+            <id property="refundId" column="refund_id" jdbcType="BIGINT"/>
+            <result property="shopId" column="shop_id" jdbcType="BIGINT"/>
+            <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <result property="orderAmount" column="order_amount" jdbcType="DOUBLE"/>
+            <result property="orderItemId" column="order_item_id" jdbcType="BIGINT"/>
+            <result property="refundSn" column="refund_sn" jdbcType="VARCHAR"/>
+            <result property="flowTradeNo" column="flow_trade_no" jdbcType="VARCHAR"/>
+            <result property="outRefundNo" column="out_refund_no" jdbcType="VARCHAR"/>
+            <result property="payType" column="pay_type" jdbcType="INTEGER"/>
+            <result property="payTypeName" column="pay_type_name" jdbcType="VARCHAR"/>
+            <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+            <result property="goodsNum" column="goods_num" jdbcType="INTEGER"/>
+            <result property="refundAmount" column="refund_amount" jdbcType="DECIMAL"/>
+            <result property="applyType" column="apply_type" jdbcType="INTEGER"/>
+            <result property="refundSts" column="refund_sts" jdbcType="INTEGER"/>
+            <result property="returnMoneySts" column="return_money_sts" jdbcType="INTEGER"/>
+            <result property="applyTime" column="apply_time" jdbcType="TIMESTAMP"/>
+            <result property="handelTime" column="handel_time" jdbcType="TIMESTAMP"/>
+            <result property="refundTime" column="refund_time" jdbcType="TIMESTAMP"/>
+            <result property="photoFiles" column="photo_files" jdbcType="VARCHAR"/>
+            <result property="buyerMsg" column="buyer_msg" jdbcType="VARCHAR"/>
+            <result property="sellerMsg" column="seller_msg" jdbcType="VARCHAR"/>
+            <result property="expressName" column="express_name" jdbcType="VARCHAR"/>
+            <result property="expressNo" column="express_no" jdbcType="VARCHAR"/>
+            <result property="shipTime" column="ship_time" jdbcType="TIMESTAMP"/>
+            <result property="receiveTime" column="receive_time" jdbcType="TIMESTAMP"/>
+            <result property="receiveMessage" column="receive_message" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        refund_id,shop_id,order_id,
+        order_number,order_amount,order_item_id,
+        refund_sn,flow_trade_no,out_refund_no,
+        pay_type,pay_type_name,user_id,
+        goods_num,refund_amount,apply_type,
+        refund_sts,return_money_sts,apply_time,
+        handel_time,refund_time,photo_files,
+        buyer_msg,seller_msg,express_name,
+        express_no,ship_time,receive_time,
+        receive_message
+    </sql>
+</mapper>

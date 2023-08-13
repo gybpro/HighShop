@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.high.shop.base.BaseCartController;
 import com.high.shop.domain.Basket;
 import com.high.shop.domain.Sku;
-import com.high.shop.feign.ProductServiceFeign;
+import com.high.shop.feign.CartProductFeign;
 import com.high.shop.service.BasketService;
 import com.high.shop.vo.CartItemVO;
 import com.high.shop.vo.CartMoneyVO;
@@ -33,11 +33,11 @@ public class BasketController extends BaseCartController {
 
     private final BasketService basketService;
 
-    private final ProductServiceFeign productServiceFeign;
+    private final CartProductFeign cartProductFeign;
 
-    public BasketController(BasketService basketService, ProductServiceFeign productServiceFeign) {
+    public BasketController(BasketService basketService, CartProductFeign cartProductFeign) {
         this.basketService = basketService;
-        this.productServiceFeign = productServiceFeign;
+        this.cartProductFeign = cartProductFeign;
     }
 
     /**
@@ -100,7 +100,7 @@ public class BasketController extends BaseCartController {
                 throw new RuntimeException("商品数量不能小于0");
             }
 
-            Integer stocks = productServiceFeign.getSkuStocks(basket.getSkuId());
+            Integer stocks = cartProductFeign.getSkuStocks(basket.getSkuId());
             if (finalCount > stocks) {
                 throw new RuntimeException("商品数量不能大于" + stocks);
             }
@@ -122,7 +122,7 @@ public class BasketController extends BaseCartController {
         );
 
         // 根据skuId查询详细信息，补充VO所需信息
-        List<Sku> skuList = productServiceFeign.getSkuListByIds(
+        List<Sku> skuList = cartProductFeign.getSkuListByIds(
                 basketList.stream().map(Basket::getSkuId).collect(Collectors.toList())
         );
 
@@ -203,7 +203,7 @@ public class BasketController extends BaseCartController {
         );
 
         // 根据skuId查询详细信息，补充VO所需信息
-        List<Sku> skuList = productServiceFeign.getSkuListByIds(
+        List<Sku> skuList = cartProductFeign.getSkuListByIds(
                 basketList.stream().map(Basket::getSkuId).collect(Collectors.toList())
         );
 
@@ -250,15 +250,9 @@ public class BasketController extends BaseCartController {
     }
 
     private static Sku getSku(List<Sku> skuList, Basket basket) {
-        List<Sku> tempSkuList = skuList.stream().filter(
+        return skuList.stream().filter(
                 sku -> sku.getSkuId().equals(basket.getSkuId())
-        ).collect(Collectors.toList());
-
-        if (CollectionUtils.isEmpty(tempSkuList)) {
-            throw new RuntimeException("数据异常，请稍后重试");
-        }
-
-        return tempSkuList.get(0);
+        ).collect(Collectors.toList()).get(0);
     }
 
     private static void calcMoneyList(List<BigDecimal> shopMoneyList, List<BigDecimal> shopFreightList, List<BigDecimal> itemMoneyList) {
@@ -288,6 +282,21 @@ public class BasketController extends BaseCartController {
                 .subtractMoney(subtractMoney)
                 .finalMoney(finalMoney)
                 .build();
+    }
+
+    // ============== 远程调用 ==============
+    @GetMapping("/getBasketListByIds")
+    public List<Basket> getBasketListByIds(@RequestParam("ids") List<Long> ids) {
+        return basketService.listByIds(ids);
+    }
+
+    @PostMapping("/p/shopCart/deleteUserBasket")
+    public Boolean deleteUserBasket(@RequestParam("userId") String userId, @RequestParam("skuIds") List<Long> skuIds) {
+        return basketService.remove(
+                new LambdaQueryWrapper<Basket>()
+                        .eq(Basket::getUserId, userId)
+                        .in(Basket::getSkuId, skuIds)
+        );
     }
 
 }

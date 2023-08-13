@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.high.shop.base.BaseMemberController;
 import com.high.shop.domain.Prod;
 import com.high.shop.domain.UserCollection;
-import com.high.shop.feign.ProductServiceFeign;
+import com.high.shop.feign.MemberProductFeign;
 import com.high.shop.service.UserCollectionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -28,11 +28,11 @@ public class UserCollectionController extends BaseMemberController {
 
     private final UserCollectionService userCollectionService;
 
-    private final ProductServiceFeign productServiceFeign;
+    private final MemberProductFeign memberProductFeign;
 
-    public UserCollectionController(UserCollectionService userCollectionService, ProductServiceFeign productServiceFeign) {
+    public UserCollectionController(UserCollectionService userCollectionService, MemberProductFeign memberProductFeign) {
         this.userCollectionService = userCollectionService;
-        this.productServiceFeign = productServiceFeign;
+        this.memberProductFeign = memberProductFeign;
     }
 
     @GetMapping("/count")
@@ -61,7 +61,7 @@ public class UserCollectionController extends BaseMemberController {
         // 根据prodIds来远程调用获取商品列表数据
         List<Long> prodIds = collectionPage.getRecords().stream().map(UserCollection::getProdId).collect(Collectors.toList());
 
-        List<Prod> prodList = productServiceFeign.getListByIds(prodIds);
+        List<Prod> prodList = memberProductFeign.getListByIds(prodIds);
 
         Page<Prod> prodPage = new Page<>(collectionPage.getCurrent(), collectionPage.getSize(),
                 collectionPage.getTotal());

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.high.shop.base.BaseProductController;
 import com.high.shop.domain.Prod;
 import com.high.shop.domain.ProdComm;
-import com.high.shop.feign.MemberServiceFeign;
+import com.high.shop.feign.ProductMemberFeign;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/prod/prodComm")
 public class ProdCommController extends BaseProductController {
 
-    private final MemberServiceFeign memberServiceFeign;
+    private final ProductMemberFeign productMemberFeign;
 
-    public ProdCommController(MemberServiceFeign memberServiceFeign) {
-        this.memberServiceFeign = memberServiceFeign;
+    public ProdCommController(ProductMemberFeign productMemberFeign) {
+        this.productMemberFeign = productMemberFeign;
     }
 
     @GetMapping("/page")
@@ -79,7 +79,7 @@ public class ProdCommController extends BaseProductController {
 
         List<String> userIds = prodCommList.stream().map(ProdComm::getUserId).collect(Collectors.toList());
 
-        List<Map<String, Object>> mapList = memberServiceFeign.getListByIds(userIds);
+        List<Map<String, Object>> mapList = productMemberFeign.getListByIds(userIds);
 
         prodCommList.forEach(
                 prodComm -> {

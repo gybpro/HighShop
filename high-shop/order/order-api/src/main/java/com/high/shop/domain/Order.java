@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.*;
+import java.util.List;
 import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -181,5 +182,8 @@ public class Order implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    @TableField(exist = false)
+    private List<OrderItem> orderItemList;
 
 }

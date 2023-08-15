@@ -7,6 +7,7 @@ import com.high.shop.domain.*;
 import com.high.shop.feign.OrderCartFeign;
 import com.high.shop.feign.OrderMemberFeign;
 import com.high.shop.feign.OrderProductFeign;
+import com.high.shop.service.OrderItemService;
 import com.high.shop.service.OrderService;
 import com.high.shop.vo.OrderConfirm;
 import com.high.shop.vo.OrderStatusCount;
@@ -16,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -37,14 +39,17 @@ public class OrderController extends BaseOrderController {
 
     private final OrderService orderService;
 
+    private final OrderItemService orderItemService;
+
     private final OrderMemberFeign orderMemberFeign;
 
     private final OrderProductFeign orderProductFeign;
 
     private final OrderCartFeign orderCartFeign;
 
-    public OrderController(OrderService orderService, OrderMemberFeign orderMemberFeign, OrderProductFeign orderProductFeign, OrderCartFeign orderCartFeign) {
+    public OrderController(OrderService orderService, OrderItemService orderItemService, OrderMemberFeign orderMemberFeign, OrderProductFeign orderProductFeign, OrderCartFeign orderCartFeign) {
         this.orderService = orderService;
+        this.orderItemService = orderItemService;
         this.orderMemberFeign = orderMemberFeign;
         this.orderProductFeign = orderProductFeign;
         this.orderCartFeign = orderCartFeign;
@@ -113,7 +118,7 @@ public class OrderController extends BaseOrderController {
     public ResponseEntity<String> submit(@RequestBody OrderVO orderVO) {
         String userId = getAuthenticationUserId();
         String orderNumber = orderService.submitOrder(userId, orderVO);
-        return ok(orderNumber);
+        return ok("order:" + orderNumber);
     }
 
     private void prodToConfirm(OrderVO orderVO, OrderItem orderItem) {
@@ -265,6 +270,37 @@ public class OrderController extends BaseOrderController {
         ) < 0 ? new BigDecimal(10) : BigDecimal.ZERO;
         // 将运费添加到shopFreightList
         shopFreightList.add(freight);
+    }
+
+    // ============== 远程调用 ==============
+    @GetMapping("/getOrderByOrderNumber")
+    public Order getOrderByOrderNumber(@RequestParam("orderNumber") String orderNumber) {
+        Order order = orderService.getOne(
+                new LambdaQueryWrapper<Order>()
+                        .eq(StringUtils.hasText(orderNumber), Order::getOrderNumber, orderNumber)
+        );
+
+        if (ObjectUtils.isEmpty(order)) {
+            throw new RuntimeException("订单查询异常");
+        }
+
+        order.setOrderItemList(
+                orderItemService.list(
+                        new LambdaQueryWrapper<OrderItem>()
+                                .eq(OrderItem::getOrderNumber, orderNumber)
+                )
+        );
+
+        if (CollectionUtils.isEmpty(order.getOrderItemList())) {
+            throw new RuntimeException("订单查询异常");
+        }
+
+        return order;
+    }
+
+    @GetMapping("/changeOrderStatus")
+    public boolean changeOrderStatus(@RequestParam("orderNumber") String orderNumber) {
+        return orderService.changeOrderStatus(orderNumber);
     }
 
 }

@@ -25,6 +25,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -311,6 +312,28 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
                 .setCancelTime(LocalDateTime.now())
                 .setFinallyTime(LocalDateTime.now());
         updateById(order);
+    }
+
+    @Override
+    public boolean changeOrderStatus(String orderNumber) {
+        // 根据订单编号查询订单信息
+        Order order = getOne(
+                new LambdaQueryWrapper<Order>()
+                        .eq(Order::getOrderNumber, orderNumber)
+        );
+
+        if (ObjectUtils.isEmpty(order)) {
+            throw new RuntimeException("订单查询异常");
+        }
+
+        // 修改订单状态
+        order.setOrderStatus(2)
+                .setIsPayed(1)
+                .setPayType(2)
+                .setPayTime(LocalDateTime.now())
+                .setUpdateTime(LocalDateTime.now());
+
+        return updateById(order);
     }
 
 }

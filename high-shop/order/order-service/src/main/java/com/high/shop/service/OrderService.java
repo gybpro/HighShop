@@ -29,4 +29,11 @@ public interface OrderService extends IService<Order> {
     @Transactional(rollbackFor = RuntimeException.class)
     void orderRollBack(Order order, ChangeStock changeStock);
 
+    /**
+     * 修改订单状态
+     * @param orderNumber
+     * @return
+     */
+    boolean changeOrderStatus(String orderNumber);
+
 }
